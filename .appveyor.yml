@@ -3,13 +3,6 @@ max_jobs: 1
 image: 
   - Visual Studio 2017
   - Visual Studio 2019
-# History plugin requires complete log
-#clone_depth: 5
-branches:
-  only:
-  - master
-#build:
-#  verbosity: minimal
 
 environment:
   package_name: telegraf
@@ -23,8 +16,19 @@ build_script:
   - ps: choco pack
 
 test_script:
+  - ps: Write-Host 'Test - Standard Install'
+  - ps: Write-Host 'Install Package'
   - ps: choco install $Env:PACKAGE_NAME --source="'.;https://chocolatey.org/api/v2'" -dvy
+  - ps: Write-Host 'Uninstall Package'
   - ps: choco uninstall -dvy $Env:PACKAGE_NAME
+  - ps: Write-Host 'Test - Manually Removed Re-install'
+  - ps: Write-Host 'Install Package'
+  - ps: choco install $Env:PACKAGE_NAME --source="'.;https://chocolatey.org/api/v2'" -dvy
+  - ps: Write-Host 'Run chocolatey uninstaller without removing install'
+  - ps: sc.exe delete telegraf
+  - ps: choco uninstall -dvyn $Env:PACKAGE_NAME
+  - ps: Write-Host 'Re-install Package'
+  - ps: choco install $Env:PACKAGE_NAME --source="'.;https://chocolatey.org/api/v2'" -dvy
 
 notifications:
   - provider: Email
