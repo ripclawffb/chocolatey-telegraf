@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop';
+$ErrorActionPreference = 'Stop';
 
 $unzip_folder    = $env:ProgramFiles
 $install_folder  = "$unzip_folder\telegraf"
@@ -45,3 +45,7 @@ $packageArgs = @{
 
 Install-ChocolateyZipPackage @packageArgs
 Install-ChocolateyInstallPackage @packageArgs
+
+If (Test-Path "$env:ProgramFiles\telegraf\telegraf.backup.conf" -ErrorAction SilentlyContinue) {
+  Copy-Item "$env:ProgramFiles\telegraf\telegraf.backup.conf" -Destination "$env:ProgramFiles\telegraf\telegraf.conf"
+}
