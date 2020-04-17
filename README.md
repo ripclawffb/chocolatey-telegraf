@@ -1,5 +1,7 @@
 # Chocolatey InfluxData Telegraf
 
+[![Build status](https://ci.appveyor.com/api/projects/status/v4x7i5epnpytu95p/branch/master?svg=true)](https://ci.appveyor.com/project/ripclawffb/chocolatey-telegraf/branch/master)
+
 This repository contains the chocolatey install scripts and nuspec file to install telegraf on Windows.
 
 ## Why use Telegraf?
