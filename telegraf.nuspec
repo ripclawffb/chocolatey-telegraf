@@ -26,4 +26,7 @@
     <packageSourceUrl>https://github.com/ripclawffb/chocolatey-telegraf</packageSourceUrl>
     <docsUrl>https://github.com/influxdata/telegraf</docsUrl>
   </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
 </package>
