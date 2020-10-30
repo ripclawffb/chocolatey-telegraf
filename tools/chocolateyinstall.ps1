@@ -6,8 +6,8 @@ $configDirectory = Join-Path $installFolder 'telegraf.d'
 $packageName     = 'telegraf'
 $softwareName    = 'telegraf*'
 $toolsDir        = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url             = 'https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2_windows_i386.zip'
-$url64           = 'https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2_windows_amd64.zip'
+$url             = 'https://dl.influxdata.com/telegraf/releases/telegraf-1.16.1_windows_i386.zip'
+$url64           = 'https://dl.influxdata.com/telegraf/releases/telegraf-1.16.1_windows_amd64.zip'
 $fileLocation    = Join-Path $installFolder 'telegraf.exe'
 $telegrafRegPath = "HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Application\telegraf"
 
@@ -44,10 +44,10 @@ $packageArgs = @{
   file64        = $fileLocation
 
   softwareName  = 'telegraf*'
-  
-  checksum       = 'a26e63df9ecf358c99696afe6de3cf343b3a31f44a254ee8a57bdbe81b9bcd73'
+
+  checksum       = '88f337287eb6977d90ccac2371a59cbbc838d4e73332f5c8dc07761307f91e03'
   checksumType   = 'sha256'
-  checksum64     = 'b343a62d34c8604dc7b892de519a71968318466086c6ccf0b83237d1744cbe21'
+  checksum64     = '62dd6e696e961d386342da1e05052806412062a85c6354db85747b1c08114abd'
   checksumType64 = 'sha256'
 
   silentArgs     = "--config-directory `"$configDirectory`" --service install"
@@ -69,4 +69,3 @@ If (Test-Path "$installFolder\telegraf.backup.conf" -ErrorAction SilentlyContinu
   Move-Item -Force -Path "$installFolder\telegraf.backup.conf" -Destination "$installFolder\telegraf.conf"
   Restart-Service -Name "telegraf"
 }
-
