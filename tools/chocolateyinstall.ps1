@@ -51,7 +51,7 @@ $packageArgs = @{
   checksum64     = 'c7e1fc85fa0e13c702b290f16eef46b10e9788df1920650d437788fdad195050'
   checksumType64 = 'sha256'
 
-  silentArgs     = "--config `"$baseConfigFile`" --config-directory `"$configDirectory`" --service install"
+  silentArgs     = "--config `"$baseConfigFile`" --config-directory `"$configDirectory`" service install"
   validExitCodes= @(0)
 }
 
