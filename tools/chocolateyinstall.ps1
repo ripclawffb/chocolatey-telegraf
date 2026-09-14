@@ -64,14 +64,12 @@ If((Test-Path -Path "$installFolder-$version")){
   Remove-Item -Path "$installFolder-$version" -Recurse -Force
 }
 
-Install-ChocolateyInstallPackage @packageArgs
-
-If (Test-Path $baseConfigFile -ErrorAction SilentlyContinue) {
+If (Test-Path "$installFolder\telegraf.backup.conf" -ErrorAction SilentlyContinue) {
+  Move-Item -Force -Path "$installFolder\telegraf.backup.conf" -Destination "$installFolder\telegraf.conf"
+} ElseIf (Test-Path $baseConfigFile -ErrorAction SilentlyContinue) {
   Write-Host "Appending discard output to telegraf.conf so service can start"
   Add-Content -Path $baseConfigFile -NoNewline -Value "[[outputs.discard]]`n  # no configuration`n"
 }
 
-If (Test-Path "$installFolder\telegraf.backup.conf" -ErrorAction SilentlyContinue) {
-  Move-Item -Force -Path "$installFolder\telegraf.backup.conf" -Destination "$installFolder\telegraf.conf"
-  Restart-Service -Name "telegraf"
-}
+Install-ChocolateyInstallPackage @packageArgs
+
